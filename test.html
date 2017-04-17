@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+
+<head>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 90%;
+            width: 90%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<h3>Range Finder Demo</h3>
+    <div id="map"></div>
+
+<script>
+    function initMap() {
+        var preston = {lat: 45.398342, lng: -75.711689};
+        var map = new google.maps.Map(document.getElementById('map'), {zoom: 16});
+        var geocoder = new google.maps.Geocoder;
+        geocoder.geocode({'address': 'Ottawa'}, function(results, status) {
+            if (status === 'OK') {
+                map.setCenter(results[0].geometry.location);
+            } else {
+                console.log('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+        var marker = new google.maps.Marker({
+            position: preston,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+            title: 'MultiTech Conduit Gateway',
+            map: map
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXG6cCl7CWBli9o4e6YR3UzmKypZi0WTU&callback=initMap">
+</script>
+</body>
+</html>
